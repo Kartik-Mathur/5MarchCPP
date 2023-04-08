@@ -19,10 +19,10 @@ void mergeSortedArrays(int a[],
 		}
 	}
 
-	while (j >= 0) {
-		b[k] = b[j];
+	while (i >= 0) {
+		b[k] = a[i];
 		k--;
-		j--;
+		i--;
 	}
 }
 
