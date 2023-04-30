@@ -46,11 +46,13 @@ bool sudokuSolver(int mat[][9], int i, int j, int n) {
 
 	// if hum columns ko overshoot kar gaye-->(i+1,0)
 	if (j == n) {
-		return sudokuSolver(mat, i + 1, 0, n);
+		bool KyaBaakiSolveHua = sudokuSolver(mat, i + 1, 0, n);
+		return KyaBaakiSolveHua;
 	}
 	// Agar already cell filled hai toh agle cell par jaao
 	if (mat[i][j] != 0) {
-		return sudokuSolver(mat, i, j + 1, n);
+		bool KyaBaakiSolveHua = sudokuSolver(mat, i, j + 1, n);
+		return KyaBaakiSolveHua;
 	}
 	// recursive case
 	// Do the work for one empty cell
