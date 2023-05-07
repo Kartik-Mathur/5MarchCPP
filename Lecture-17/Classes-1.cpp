@@ -3,20 +3,21 @@ using namespace std;
 
 /////////////////////////////// BLUEPRINT ////////////////////////////////////////
 class Car {
+private:
+	int price;
 public:
 	char *name;
-	int price;
 	int model;
 	int	seats;
+	const int tyres;
 
 	// 1. Default Constructor: We create objects with the help of constructor
-	Car() {
-		name = NULL;
+	Car(): tyres(4), name(NULL) {
+		// name = NULL;
 		cout << "Inside Default Constructor\n";
 	}
 
-	// 2. Parameterised Constructor:This is a function only
-	Car(char *n, int p, int m, int s) {
+	Car(char *n, int p, int m, int s): tyres(4) {
 		cout << "Inside Parameterised Constructor\n";
 		name = new char[strlen(n) + 1];
 		strcpy(name, n);
@@ -25,27 +26,39 @@ public:
 		seats = s;
 	}
 
-	// 3. Copy Constructor: Ek object se doosre object ko banane ke liye
-	Car(Car &X) {
+	Car(const Car &X): tyres(4) {
 		cout << "Inside Copy Constructor\n";
-		// This will create deep copy
 		name = new char[strlen(X.name) + 1];
 		strcpy(name, X.name);
-		// name = X.name; // This will create shallow copy
 		price = X.price;
 		model = X.model;
 		seats = X.seats;
 	}
 
 	// 4. COPY ASSIGNMENT OPERATOR
-	// void operator=(Car X) {
-	// 	cout << "Inside Copy Assignment Operator\n";
+	void operator=(const Car X) {
+		cout << "Inside Copy Assignment Operator\n";
+		strcpy(name, X.name);
+		price = X.price;
+		model = X.model;
+		seats = X.seats;
+	}
 
-	// 	strcpy(name, X.name);
-	// 	price = X.price;
-	// 	model = X.model;
-	// 	seats = X.seats;
-	// }
+	// 5. Operator Overloading
+	// A+=B;
+	void operator+=(const Car &X) {
+
+		char *oldName = name;
+		name = new char[strlen(name) + strlen(X.name) + 1];
+		strcpy(name, oldName);
+		strcat(name, X.name);
+		delete[] oldName;
+		oldName = NULL;
+
+		price += X.price;
+		model += X.model;
+		seats += X.seats;
+	}
 
 	void print() {
 		cout << "Name  : " << name << endl;
@@ -62,6 +75,22 @@ public:
 		name = new char[strlen(n) + 1];
 		strcpy(name, n);
 	}
+
+
+	// GETTER
+	int getPrice() {
+		return price;
+	}
+
+	// SETTER
+	void setPrice(int p) {
+		if (p > 50 and p < 100) {
+			price = p;
+		}
+		else {
+			price = 70;
+		}
+	}
 };
 /////////////////////////////// BLUEPRINT ////////////////////////////////////////
 
@@ -71,7 +100,8 @@ int main() {
 	Car A; // Object of Car
 	// strcpy(A.name, "BMW");
 	A.updateName("BMW");
-	A.price = 10;
+	// A.price = 10;
+	A.setPrice(10);
 	A.model = 2020;
 	A.seats = 4;
 
@@ -79,10 +109,10 @@ int main() {
 	Car B;
 	B.updateName("Maruti");
 	// strcpy(B.name, "Maruti");
-	B.price = 100;
+	B.setPrice(-100);
 	B.model = 2022;
 	B.seats = 7;
-
+	cout << A.getPrice() << endl;
 	// Car C("Audi", 200, 2023, 2);
 	// Car D("Bentley", 50, 2023, 4);
 	// Car E("Honda", 1200, 2023, 6);
@@ -99,6 +129,8 @@ int main() {
 	Car D(C);
 
 	D.name[0] = 'T';
+
+	A += D;
 
 	A.print();
 	B.print();
