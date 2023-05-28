@@ -91,6 +91,12 @@ public:
 			price = 70;
 		}
 	}
+
+	// DESCRUCTOR
+	~Car() {
+		cout << "Deleting car: " << name << endl;
+		delete []name;
+	}
 };
 /////////////////////////////// BLUEPRINT ////////////////////////////////////////
 
