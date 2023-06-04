@@ -190,6 +190,7 @@ node* mergeLL(node* a, node* b) {
 }
 //////////////////// MERGE LL ////////////////////////////////////////
 
+
 void printLL(node * p) {
 
 	while (p != NULL) {
