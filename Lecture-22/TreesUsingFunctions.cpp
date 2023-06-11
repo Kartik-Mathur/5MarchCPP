@@ -52,6 +52,65 @@ void postOrder(node* root) {
 }
 
 
+int countNodes(node* root) {
+	// base case
+	if (!root) {
+		return 0;
+	}
+
+	// recursive case
+	return countNodes(root->left) + countNodes(root->right) + 1;
+	// int LST_NodesCount = countNodes(root->left);
+	// int RST_NodesCount = countNodes(root->right);
+	// return LST_NodesCount + RST_NodesCount + 1;
+}
+
+int height(node* root) {
+	if (!root) return 0;
+
+	int leftHeight = height(root->left);
+	int rightHeight = height(root->right);
+	return max(leftHeight, rightHeight) + 1;
+}
+
+int diameter(node* root) {
+	// base case
+	if (!root) return 0;
+
+	// recursive case
+	int op1 = height(root->left) + height(root->right);
+	int op2 = diameter(root->left);
+	int op3 = diameter(root->right);
+	return max(op1, max(op2, op3));
+}
+
+
+class Pair {
+public:
+	int height;
+	int diameter;
+	Pair() {
+		height = diameter = 0;
+	}
+};
+
+Pair fastDiameter(node* root) {
+	// base case
+	if (!root) {
+		Pair p;
+		return p;
+	}
+	// recursive case
+	Pair left = fastDiameter(root->left);
+	Pair right = fastDiameter(root->right);
+	Pair p;
+	p.height = max(left.height, right.height) + 1;
+	int op1 = left.height + right.height;
+	int op2 = left.diameter;
+	int op3 = right.diameter;
+	p.diameter = max(op1, max(op2, op3));
+	return p;
+}
 
 int main() {
 
@@ -65,6 +124,14 @@ int main() {
 	cout << endl;
 	postOrder(root);
 	cout << endl;
+
+	cout << "Count Nodes: " << countNodes(root) << endl;
+	cout << "Tree Height: " << height(root) << endl;
+	cout << "Diameter Tree: " << diameter(root) << endl;
+
+	Pair p = fastDiameter(root);
+	cout << "Fast height: " << p.height << endl;
+	cout << "Fast diameter: " << p.diameter << endl;
 
 	return 0;
 }
