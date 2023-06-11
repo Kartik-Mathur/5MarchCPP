@@ -112,12 +112,42 @@ Pair fastDiameter(node* root) {
 	return p;
 }
 
+
+void mirror(node* root) {
+	if (!root) return;
+
+	swap(root->left, root->right);
+	mirror(root->left);
+	mirror(root->right);
+}
+
+node* findNode(node* root, int key) {
+	// base case
+	if (!root) return NULL;
+
+	// recursive case
+	if (root->data == key) {
+		return root;
+	}
+
+	node* ans = findNode(root->left, key);
+	if (ans != NULL) {
+		return ans;
+	}
+
+	ans = findNode(root->right, key);
+	if (ans != NULL) {
+		return ans;
+	}
+	return NULL;
+}
+
 int main() {
 
 	node* root = NULL;
 
 	root = createTree();
-
+	mirror(root);
 	preOrder(root);
 	cout << endl;
 	inOrder(root);
