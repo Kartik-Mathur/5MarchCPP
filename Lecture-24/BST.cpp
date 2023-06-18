@@ -73,33 +73,6 @@ void printInRange(node* root, int k1, int k2) {
 	printInRange(root->right, k1, k2);
 }
 
-node* searchBST(node* root, int key) {
-	if (!root) {
-		return NULL;
-	}
-
-	if (root->data == key) return root;
-	if (root->data > key) {
-		return searchBST(root->left, key);
-	}
-	else {
-		return searchBST(root->right, key);
-	}
-}
-
-bool isBST(node*root, int mi = INT_MIN, int mx = INT_MAX) {
-	if (!root) return true;
-
-	if (root->data >= mi and root->data <= mx and
-	        isBST(root->left, mi, root->data) == true and
-	        isBST(root->right, root->data, mx) == true) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 void levelOrderPrint(node * root) {
 	queue<node*> q;
 	q.push(root);
