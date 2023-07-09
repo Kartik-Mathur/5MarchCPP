@@ -28,7 +28,7 @@ public:
 		int DL = solve(root->left, target, k);
 		if (DL != -1) {
 			if (DL + 1 == k) {
-				v.push_back(root);
+				v.push_back(root->val);
 				return -1;
 			}
 			else {
@@ -37,14 +37,14 @@ public:
 			}
 		}
 
-		int DR = solve(root->left, target, k);
+		int DR = solve(root->right, target, k);
 		if (DR != -1) {
 			if (DR + 1 == k) {
-				v.push_back(root);
+				v.push_back(root->val);
 				return -1;
 			}
 			else {
-				findNodes(root->right, k - 2 - DR);
+				findNodes(root->left, k - 2 - DR);
 				return DR + 1;
 			}
 		}
