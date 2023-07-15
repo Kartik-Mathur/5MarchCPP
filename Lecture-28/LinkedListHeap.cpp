@@ -39,7 +39,7 @@ class meraComparator
 {
 public:
 	bool operator()(node* a, node* b) {
-		return a ->data < b->data;
+		return a->data < b->data;
 	}
 
 };
