@@ -1,27 +1,6 @@
-#include <iostream>
-using namespace std;
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
 
-
-
-int main() {
-
-    vector<vector<int> > v({});
-
-    return 0;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
+};
