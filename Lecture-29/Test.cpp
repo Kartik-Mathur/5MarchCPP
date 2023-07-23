@@ -98,6 +98,33 @@ public:
 			cout << endl;
 		}
 	}
+
+	node* search(string &key) {
+		int i = hashFunction(key);
+		node* head = a[i];
+
+		while (head) {
+			if (head->key == key) return head;
+			head = head->next;
+		}
+		return head;
+	}
+
+	int& operator[](string key) {
+		node* ans = search(key);
+		if (ans) {
+			// Key present hai, value update karo
+			return ans->val;
+		}
+		else {
+			// Key present nhi hai, key ko insert karo
+			int rv;
+			insert(key, rv);
+			ans = search(key);
+			return ans->val;
+		}
+	}
+
 };
 
 int main() {
@@ -109,10 +136,17 @@ int main() {
 	h.insert("kiwi", 50);
 	h.insert("Pineapple", 140);
 	h.insert("banana", 60);
-	h.insert("Orange", 160);
-	h.insert("Anaar", 110);
-	h.insert("Grapes", 30);
-	h.insert("Aadu", 300);
+	h["Orange"] = 160; // Insertion
+	h["Anaar"] = 110;
+	h["Grapes"] = 30;
+
+	h["Orange"] = 250; // Update
+
+	cout << h["Orange"] << endl; // Search
+	// h.insert("Orange", 160);
+	// h.insert("Anaar", 110);
+	// h.insert("Grapes", 30);
+	// h.insert("Aadu", 300);
 
 	h.print();
 
