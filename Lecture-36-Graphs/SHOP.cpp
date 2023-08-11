@@ -49,28 +49,22 @@ void solve() {
 int32_t main() {
 
 
-	cin >> m >> n;
+	while (cin >> m >> n) {
 
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < m; ++j)
+		for (int i = 0; i < n; ++i)
 		{
-			cin >> a[i][j];
-			samay[i][j] = inf;
-			if (a[i][j] == 'S') src_i = i, src_j = j, a[i][j] = '0';
-			if (a[i][j] == 'D') des_j = j, des_i = i, a[i][j] = '0';
+			for (int j = 0; j < m; ++j)
+			{
+				cin >> a[i][j];
+				samay[i][j] = inf;
+				if (a[i][j] == 'S') src_i = i, src_j = j, a[i][j] = '0';
+				if (a[i][j] == 'D') des_j = j, des_i = i, a[i][j] = '0';
+			}
 		}
+
+		solve();
 	}
 
-	solve();
-
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < m; ++j)
-		{
-			cout << samay[i][j] << " ";
-		} cout << endl;
-	}
 
 	return 0;
 }
